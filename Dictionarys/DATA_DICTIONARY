@@ -1,0 +1,132 @@
+Data Dictionary
+
+Variable ID: mep_4ms_standard
+
+Variable Name: MEP, 4ms ISI Standard Script
+
+Variable Definition: The motor evoked potentials (MEP) elicited by paired-pulse TMS with a 4ms interstimulus interval (ISI) during the 
+standard motor imagery script.
+
+Variable Type: Number
+
+Allowable Values / Parameters: add in later
+
+Requirement: NO
+
+Notes: 
+
+
+***
+
+Variable ID: mep_8ms_standard
+
+Variable Name: MEP, 8ms ISI Standard Script
+
+Variable Definition: The motor evoked potentials (MEP) elicited by paired-pulse TMS with a 8ms interstimulus interval (ISI) during the 
+standard motor imagery script.
+
+Variable Type: Number
+
+Allowable Values / Parameters: add in later
+
+Requirement: NO
+
+Notes: 
+
+
+***
+
+
+Variable ID: mep_4ms_lsrt
+
+Variable Name: MEP, 4ms ISI Layered Stimulus Response Training Script
+
+Variable Definition: The motor evoked potentials (MEP) elicited by paired-pulse TMS with a 4ms interstimulus interval (ISI) during the 
+Layered Stimulus Response Training motor imagery script.
+
+Variable Type: Number
+
+Allowable Values / Parameters: add in later
+
+Requirement: NO
+
+Notes: 
+
+
+
+***
+
+
+Variable ID: mep_8ms_lsrt
+
+Variable Name: MEP, 4ms ISI Layered Stimulus Response Training Script
+
+Variable Definition: The motor evoked potentials (MEP) elicited by paired-pulse TMS with a 8ms interstimulus interval (ISI) during the 
+Layered Stimulus Response Training motor imagery script.
+
+Variable Type: Number
+
+Allowable Values / Parameters: add in later
+
+Requirement: NO
+
+Notes: 
+
+
+
+***
+
+Variable ID: mep_8ms_baseline
+
+Variable Name: MEP, 8ms ISI baseline
+
+Variable Definition: The motor evoked potentials (MEP) elicited by paired-pulse TMS with a 8ms interstimulus interval (ISI) during baseline
+assessment.
+
+Variable Type: Number
+
+Allowable Values / Parameters: add in later
+
+Requirement: NO
+
+Notes: 
+
+
+***
+
+
+Variable ID: mep_4ms_baseline
+
+Variable Name: MEP, 4ms ISI baseline
+
+Variable Definition: The motor evoked potentials (MEP) elicited by paired-pulse TMS with a 4ms interstimulus interval (ISI) during baseline
+assessment.
+
+Variable Type: Number
+
+Allowable Values / Parameters: add in later
+
+Requirement: NO
+
+Notes: 
+
+
+***
+
+
+Variable ID: mep_ts_baseline
+
+Variable Name: MEP, test stimulus only baseline
+
+Variable Definition: The motor evoked potentials (MEP) elicited by single-pulse TMS during baseline
+assessment.
+
+Variable Type: Number
+
+Allowable Values / Parameters: add in later
+
+Requirement: NO
+
+Notes: 
+
+
