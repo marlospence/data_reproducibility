@@ -1,0 +1,34 @@
+---
+title: "draft_manuscript"
+output: pdf_document
+date: "2026-02-12"
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Sensory Integration and Motor Planning
+
+Activity in the posterior parietal cortex (PPC) is associated with key roles in motor planning prior to movement execution, integrating visual, auditory, and somatosensory information prior to movement initiation. Activity in the PPC is associated with the initial planning of a physical action [@cohen2002; @andersen2002]]. During the earliest stages of motor planning prior to execution, the PPC is involved with the transformation and coordination of reference-frames from various sensory modalities; integrating visual coordinates originating from the eyes, auditory information related to head coordinates, and tactile coordinates from the body. Neurons located in the PPC are associated with the transformation of these varied sensory stimuli into general coordinates that form a common frame of reference, essential for the coordination of movements of different effectors to ensure coherent movement execution [@andersen2002a]. Early stages of motor planning taking place in the PPC represent the expected visual outcomes of a movement prior to downstream motor execution, with later stages of motor activity occurring primarily in the primary motor cortex (M1) [@pilacinski2018]. There is evidence that suggests the PPC, independent of the M1, processes visual information used to later produce a corresponding motor output [@pilacinski2018], further implicating the PPC’s role in the visual-integration aspects of motor planning/preparation.
