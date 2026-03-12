@@ -11,7 +11,9 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
+```{r}
+list.files(getwd(), pattern = ".html")
+```
 ## Introduction
 
 ### Sensory Integration and Motor Planning (Sample Intro First Paragraph)
@@ -123,6 +125,19 @@ ggplot(standard_ttest, aes(x = condition, y = mep_amplitude, fill = condition)) 
     strip.text      = element_text(size = 12, face = "bold"),
     legend.position = "none"
   )
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+
+table_data <- normalised %>%
+  group_by(condition) %>%
+  summarise(
+    Mean = round(mean(pct_of_ts, na.rm = TRUE), 2),
+    SD = round(sd(pct_of_ts, na.rm = TRUE), 2),
+    SE = round(sd(pct_of_ts, na.rm = TRUE) / sqrt(n()), 2)
+  )
+
+kable(table_data, caption = "MEP Amplitude as % of TS Mean by Condition")
+```
 ```
 
 ## Discussion
