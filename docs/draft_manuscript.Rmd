@@ -1,38 +1,40 @@
 ---
-title: "draft_manuscript"
-output: pdf_document
+title: "draft_manuscript_Dual_Coil"
 date: "2026-02-12"
-bibliography: references.bib
-csl: apa.csl
+bibliography: "C:/Users/marlo/OneDrive/Data Reproducibility/DataReprod/data_reproducibility/references.bib"
+csl: "C:/Users/marlo/OneDrive/Data Reproducibility/DataReprod/data_reproducibility/apa.csl"
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Introduction
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+### Sensory Integration and Motor Planning (Sample Intro First Paragraph)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Activity in the posterior parietal cortex (PPC) is associated with key roles in motor planning prior to movement execution, integrating visual, auditory, and somatosensory information prior to movement initiation. Activity in the PPC is associated with the initial planning of a physical action [@cohenCommonReferenceFrame2002; @andersenIntentionalMapsPosterior2002]]. During the earliest stages of motor planning prior to execution, the PPC is involved with the transformation and coordination of reference-frames from various sensory modalities; integrating visual coordinates originating from the eyes, auditory information related to head coordinates, and tactile coordinates from the body. Neurons located in the PPC are associated with the transformation of these varied sensory stimuli into general coordinates that form a common frame of reference, essential for the coordination of movements of different effectors to ensure coherent movement execution [@andersenIntentionalMapsPosterior2002]. Early stages of motor planning taking place in the PPC represent the expected visual outcomes of a movement prior to downstream motor execution, with later stages of motor activity occurring primarily in the primary motor cortex (M1) [@pilacinskiHumanPosteriorParietal2018]. There is evidence that suggests the PPC, independent of the M1, processes visual information used to later produce a corresponding motor output [@pilacinskiHumanPosteriorParietal2018], further implicating the PPC’s role in the visual-integration aspects of motor planning/preparation.
 
-```         
-```
+### Research Aim
 
-## Including Plots
+To determine the intrahemispheric interconnectivity of the PPC (specifically the supramarginal gyrus) with the M1 during motor imagery (MI; the imagination of movement without physical execution) using dual-coil TMS.
 
-You can also embed plots, for example:
 
-```         
-```
+## Methods (Sample)
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Participants completed blocks of MI of a finger abduction task while dual-coil TMS was administered over the left PPC and M1.Electromyography (EMG) of the finger muscle was used to assess corticospinal excitability during the task.Paired TMS pulses were administered with the PPC as priming stimuli, followed by the test stimuli to the M1 after 4/8 milliseconds interstimulus interval (ISI).Single pulses were administered for comparison to the paired pulses.
 
-## Sensory Integration and Motor Planning
+### Data Analysis
 
-Activity in the posterior parietal cortex (PPC) is associated with key roles in motor planning prior to movement execution, integrating visual, auditory, and somatosensory information prior to movement initiation. Activity in the PPC is associated with the initial planning of a physical action [@cohen2002; @andersen2002]]. During the earliest stages of motor planning prior to execution, the PPC is involved with the transformation and coordination of reference-frames from various sensory modalities; integrating visual coordinates originating from the eyes, auditory information related to head coordinates, and tactile coordinates from the body. Neurons located in the PPC are associated with the transformation of these varied sensory stimuli into general coordinates that form a common frame of reference, essential for the coordination of movements of different effectors to ensure coherent movement execution [@andersen2002a]. Early stages of motor planning taking place in the PPC represent the expected visual outcomes of a movement prior to downstream motor execution, with later stages of motor activity occurring primarily in the primary motor cortex (M1) [@pilacinski2018]. There is evidence that suggests the PPC, independent of the M1, processes visual information used to later produce a corresponding motor output [@pilacinski2018], further implicating the PPC’s role in the visual-integration aspects of motor planning/preparation.
+Peak-to-peak amplitudes of motor evoked potentials (MEPs) elicited by TMS during the trials were analyzed to determine facilitatory or inhibitory interactions between the PPC and the M1 during MI.Comparisons were made between paired-TMS trials (PPC and M1 pulses) and M1 stimulus only trials.
 
 ## Figures/Results Draft
+
+Overall, group level analyses yielded no significant interactions between the PPC and M1 during MI using our methodology. However, individual participant data showed individual variation in parietal-motor interaction during MI potential providing evidence for modulating activity at the 4ms ISI in differing ways for different individuals.
+
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
@@ -122,5 +124,14 @@ ggplot(standard_ttest, aes(x = condition, y = mep_amplitude, fill = condition)) 
     legend.position = "none"
   )
 ```
+
+## Discussion
+
+Findings provide insight into the neurophysiology underlying MI as well as dual-coil TMS stimulation parameters in research. 
+
+### Limitations
+
+Due to the nature of the setup, we were unable to hotspot the PPC for each individual participant to guarantee we stimulate the same place on their brain. This could Potentially account for individual variability due to slight differences in TMS stimulus location.We are also limited to analysing a small sample size at the present moment.
+
 
 # References
