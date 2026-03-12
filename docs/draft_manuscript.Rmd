@@ -3,6 +3,7 @@ title: "draft_manuscript"
 output: pdf_document
 date: "2026-02-12"
 bibliography: references.bib
+csl: apa.csl
 ---
 
 ```{r setup, include=FALSE}
@@ -15,16 +16,14 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
+```         
 ```
 
 ## Including Plots
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```         
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
@@ -32,3 +31,96 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 ## Sensory Integration and Motor Planning
 
 Activity in the posterior parietal cortex (PPC) is associated with key roles in motor planning prior to movement execution, integrating visual, auditory, and somatosensory information prior to movement initiation. Activity in the PPC is associated with the initial planning of a physical action [@cohen2002; @andersen2002]]. During the earliest stages of motor planning prior to execution, the PPC is involved with the transformation and coordination of reference-frames from various sensory modalities; integrating visual coordinates originating from the eyes, auditory information related to head coordinates, and tactile coordinates from the body. Neurons located in the PPC are associated with the transformation of these varied sensory stimuli into general coordinates that form a common frame of reference, essential for the coordination of movements of different effectors to ensure coherent movement execution [@andersen2002a]. Early stages of motor planning taking place in the PPC represent the expected visual outcomes of a movement prior to downstream motor execution, with later stages of motor activity occurring primarily in the primary motor cortex (M1) [@pilacinski2018]. There is evidence that suggests the PPC, independent of the M1, processes visual information used to later produce a corresponding motor output [@pilacinski2018], further implicating the PPC’s role in the visual-integration aspects of motor planning/preparation.
+
+## Figures/Results Draft
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+
+data <- read.csv("C:/Users/marlo/OneDrive/Data Reproducibility/DataReprod/data_reproducibility/data/data_processed/mep_long.csv")
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="MEP amplitude normalised to TS mean", fig.width=10, fig.height=7}
+# --- Prepare data ---
+standard_ttest <- data %>%
+  filter(script == "standard") %>%
+  mutate(condition = factor(condition, levels = c("TS", "4ms", "8ms")),
+         participant_id = as.factor(participant_id))
+
+participant_means <- standard_ttest %>%
+  group_by(participant_id, condition) %>%
+  summarise(mean_mep = mean(mep_amplitude, na.rm = TRUE), .groups = "drop")
+
+ts_means <- participant_means %>%
+  filter(condition == "TS") %>%
+  select(participant_id, ts_mean = mean_mep)
+
+normalised <- participant_means %>%
+  left_join(ts_means, by = "participant_id") %>%
+  mutate(pct_of_ts = (mean_mep / ts_mean) * 100)
+
+group_summary <- normalised %>%
+  group_by(condition) %>%
+  summarise(
+    mean_pct = mean(pct_of_ts, na.rm = TRUE),
+    se_pct   = sd(pct_of_ts, na.rm = TRUE) / sqrt(n()),
+    .groups  = "drop"
+  )
+
+ggplot() +
+  geom_line(data = normalised,
+            aes(x = condition, y = pct_of_ts, group = participant_id),
+            colour = "grey20", alpha = 0.6, linewidth = 0.5) +
+  geom_point(data = normalised,
+             aes(x = condition, y = pct_of_ts, group = participant_id),
+             colour = "grey20", alpha = 0.6, size = 1.5) +
+  geom_errorbar(data = group_summary,
+                aes(x = condition, ymin = mean_pct - se_pct, ymax = mean_pct + se_pct),
+                width = 0.1, linewidth = 1, colour = "black") +
+  geom_point(data = group_summary,
+             aes(x = condition, y = mean_pct, fill = condition),
+             shape = 21, size = 4, colour = "black") +
+  geom_line(data = group_summary,
+            aes(x = condition, y = mean_pct, group = 1),
+            linewidth = 1, colour = "black") +
+  geom_hline(yintercept = 100, linetype = "dashed", colour = "red", alpha = 0.6) +
+  scale_fill_manual(values = c("TS" = "#4C72B0", "4ms" = "#DD8452", "8ms" = "#55A868")) +
+  labs(
+    title    = "MEP Amplitude as % of TS Mean per Participant",
+    subtitle = "Grey lines = individual participants | Black = group mean ± SE | Red dashed = 100% (TS level)",
+    x        = "Condition",
+    y        = "MEP Amplitude (% of TS Mean)",
+    fill     = "Condition"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title    = element_text(hjust = 0.5, size = 20, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 13, colour = "grey20"),
+    axis.title    = element_text(size = 17),
+    axis.text     = element_text(size = 17),
+    legend.position = "none"
+  )
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="MEP amplitude by condition per participant", fig.width=10, fig.height=8}
+ggplot(standard_ttest, aes(x = condition, y = mep_amplitude, fill = condition)) +
+  geom_boxplot(outlier.shape = 16, outlier.size = 1.5, alpha = 0.7) +
+  geom_jitter(width = 0.1, alpha = 0.4, size = 1) +
+  facet_wrap(~ participant_id) +
+  scale_fill_manual(values = c("TS" = "#4C72B0", "4ms" = "#DD8452", "8ms" = "#55A868")) +
+  labs(
+    title = "MEP Amplitude by Condition per Participant",
+    x     = "Condition",
+    y     = "MEP Amplitude (mV)",
+    fill  = "Condition"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title      = element_text(hjust = 0.5, size = 20, face = "bold"),
+    axis.title      = element_text(size = 17),
+    axis.text       = element_text(size = 15),
+    strip.text      = element_text(size = 12, face = "bold"),
+    legend.position = "none"
+  )
+```
+
+# References
