@@ -125,7 +125,7 @@ ggplot(standard_ttest, aes(x = condition, y = mep_amplitude, fill = condition)) 
     strip.text      = element_text(size = 12, face = "bold"),
     legend.position = "none"
   )
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+
 library(knitr)
 
 table_data <- normalised %>%
