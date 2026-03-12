@@ -138,7 +138,6 @@ table_data <- normalised %>%
 
 kable(table_data, caption = "MEP Amplitude as % of TS Mean by Condition")
 ```
-```
 
 ## Discussion
 
