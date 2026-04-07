@@ -1,0 +1,222 @@
+---
+title: "draft_manuscript_Dual_Coil"
+date: "2026-02-12"
+bibliography: references.bib
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+csl: apa.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+list.files(getwd(), pattern = ".html")
+```
+
+## Introduction
+
+### Sensory Integration and Motor Planning (Sample Intro First Paragraph)
+
+Activity in the posterior parietal cortex (PPC) is associated with key roles in motor planning prior to movement execution, integrating visual, auditory, and somatosensory information prior to movement initiation. Activity in the PPC is associated with the initial planning of a physical action [@cohenCommonReferenceFrame2002; @andersenIntentionalMapsPosterior2002]]. During the earliest stages of motor planning prior to execution, the PPC is involved with the transformation and coordination of reference-frames from various sensory modalities; integrating visual coordinates originating from the eyes, auditory information related to head coordinates, and tactile coordinates from the body. Neurons located in the PPC are associated with the transformation of these varied sensory stimuli into general coordinates that form a common frame of reference, essential for the coordination of movements of different effectors to ensure coherent movement execution [@andersenIntentionalMapsPosterior2002]. Early stages of motor planning taking place in the PPC represent the expected visual outcomes of a movement prior to downstream motor execution, with later stages of motor activity occurring primarily in the primary motor cortex (M1) [@pilacinskiHumanPosteriorParietal2018]. There is evidence that suggests the PPC, independent of the M1, processes visual information used to later produce a corresponding motor output [@pilacinskiHumanPosteriorParietal2018], further implicating the PPC’s role in the visual-integration aspects of motor planning/preparation.
+
+### Research Aim
+
+To determine the intrahemispheric interconnectivity of the PPC (specifically the supramarginal gyrus) with the M1 during motor imagery (MI; the imagination of movement without physical execution) using dual-coil TMS. The secondary aim of the current research is to determine whether guided motor imagery leads to stronger PPC-M1 interactions than a standard script.
+
+
+## Methods (Sample)
+
+Participants completed blocks of MI of a finger abduction task while dual-coil TMS was administered over the left PPC and M1.Electromyography (EMG) of the finger muscle was used to assess corticospinal excitability during the task.Paired TMS pulses were administered with the PPC as priming stimuli, followed by the test stimuli to the M1 after 4/8 milliseconds interstimulus interval (ISI).Single pulses were administered for comparison to the paired pulses.
+
+### Data Analysis
+
+Peak-to-peak amplitudes of motor evoked potentials (MEPs) elicited by TMS during the trials were analyzed to determine facilitatory or inhibitory interactions between the PPC and the M1 during MI.Comparisons were made between paired-TMS trials (PPC and M1 pulses) and M1 stimulus only trials.
+
+## Figures/Results Draft
+
+Overall, group level analyses yielded no significant interactions between the PPC and M1 during MI using our methodology. However, individual participant data showed individual variation in parietal-motor interaction during MI potential providing evidence for modulating activity at the 4ms ISI in differing ways for different individuals.
+
+```{r mep_analysis_full, echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.height=7}
+# ============================================================
+# Libraries
+# ============================================================
+library(dplyr)
+library(ggplot2)
+library(effsize)
+library(knitr)
+
+# ============================================================
+# Load data (adjust path if necessary)
+# ============================================================
+data <- read.csv("C:/Users/marlo/OneDrive/Data Reproducibility/DataReprod/data_reproducibility/data/data_processed/mep_long.csv")
+
+# ============================================================
+# Prepare data
+# ============================================================
+data_clean <- data %>%
+  mutate(
+    participant_id = as.factor(participant_id),
+    condition = factor(condition,
+                       levels = c("TS", "4ms", "8ms"),
+                       labels = c("M1-only", "4ms", "8ms")),
+    log_mep = log(mep_amplitude)
+  )
+
+prep_data <- function(script_label) {
+  data_clean %>% filter(script == script_label)
+}
+
+normalise_to_ts <- function(df) {
+  means <- df %>%
+    group_by(participant_id, condition) %>%
+    summarise(mean_log = mean(log_mep, na.rm = TRUE), .groups = "drop") %>%
+    mutate(mean_mep_bt = exp(mean_log))
+  
+  ts_ref <- means %>%
+    filter(condition == "M1-only") %>%
+    select(participant_id, ts_mean = mean_mep_bt)
+  
+  means %>%
+    left_join(ts_ref, by = "participant_id") %>%
+    mutate(pct_of_ts = (mean_mep_bt / ts_mean) * 100)
+}
+
+# ============================================================
+# Plot functions
+# ============================================================
+condition_colours <- c("M1-only" = "#4C72B0", "4ms" = "#DD8452", "8ms" = "#55A868")
+
+plot_normalised <- function(normalised_df, title_label) {
+  group_summary <- normalised_df %>%
+    group_by(condition) %>%
+    summarise(
+      mean_pct = mean(pct_of_ts, na.rm = TRUE),
+      se_pct   = sd(pct_of_ts, na.rm = TRUE) / sqrt(n()),
+      .groups  = "drop"
+    )
+  
+  ggplot() +
+    geom_line(data = normalised_df,
+              aes(x = condition, y = pct_of_ts, group = participant_id),
+              colour = "grey20", alpha = 0.6, linewidth = 0.5) +
+    geom_point(data = normalised_df,
+               aes(x = condition, y = pct_of_ts, group = participant_id),
+               colour = "grey20", alpha = 0.6, size = 1.5) +
+    geom_errorbar(data = group_summary,
+                  aes(x = condition, ymin = mean_pct - se_pct, ymax = mean_pct + se_pct),
+                  width = 0.1, linewidth = 1, colour = "black") +
+    geom_point(data = group_summary,
+               aes(x = condition, y = mean_pct, fill = condition),
+               shape = 21, size = 4, colour = "black") +
+    geom_line(data = group_summary,
+              aes(x = condition, y = mean_pct, group = 1),
+              linewidth = 1, colour = "black") +
+    geom_hline(yintercept = 100, linetype = "dashed", colour = "red", alpha = 0.6) +
+    scale_fill_manual(values = condition_colours) +
+    labs(title    = title_label,
+         subtitle = "Grey lines = individual participants | Black = group mean ± SE | Red dashed = 100% (M1-only level)",
+         x = "Condition", y = "MEP Amplitude (% of M1-only Mean)") +
+    theme_classic() +
+    theme(
+      plot.title      = element_text(hjust = 0.5, size = 20, face = "bold"),
+      plot.subtitle   = element_text(hjust = 0.5, size = 13, colour = "grey20"),
+      axis.title      = element_text(size = 17),
+      axis.text       = element_text(size = 15),
+      strip.text      = element_text(size = 12, face = "bold"),
+      legend.position = "none"
+    )
+}
+
+plot_individual <- function(df, title_label) {
+  ggplot(df, aes(x = condition, y = mep_amplitude, fill = condition)) +
+    geom_boxplot(outlier.shape = 16, outlier.size = 1.5, alpha = 0.7) +
+    geom_jitter(width = 0.1, alpha = 0.4, size = 1) +
+    facet_wrap(~ participant_id) +
+    scale_fill_manual(values = condition_colours) +
+    labs(title = title_label, x = "Condition", y = "MEP Amplitude (mV)") +
+    theme_classic() +
+    theme(
+      plot.title      = element_text(hjust = 0.5, size = 20, face = "bold"),
+      axis.title      = element_text(size = 17),
+      axis.text       = element_text(size = 15),
+      strip.text      = element_text(size = 12, face = "bold"),
+      legend.position = "none"
+    )
+}
+
+get_effect_sizes <- function(df, script_label) {
+  means <- df %>%
+    group_by(participant_id, condition) %>%
+    summarise(mean_log = mean(log_mep), .groups = "drop")
+  
+  ts  <- means %>% filter(condition == "M1-only")
+  ms4 <- means %>% filter(condition == "4ms")
+  ms8 <- means %>% filter(condition == "8ms")
+  
+  comp_4ms <- inner_join(ts, ms4, by = "participant_id")
+  comp_8ms <- inner_join(ts, ms8, by = "participant_id")
+  
+  d_4ms <- cohen.d(comp_4ms$mean_log.y, comp_4ms$mean_log.x, paired = TRUE)
+  d_8ms <- cohen.d(comp_8ms$mean_log.y, comp_8ms$mean_log.x, paired = TRUE)
+  
+  tibble(
+    Script = script_label,
+    Comparison = c("4ms vs M1-only", "8ms vs M1-only"),
+    Cohens_d = round(c(d_4ms$estimate, d_8ms$estimate), 3),
+    CI_lower = round(c(d_4ms$conf.int[1], d_8ms$conf.int[1]), 3),
+    CI_upper = round(c(d_4ms$conf.int[2], d_8ms$conf.int[2]), 3)
+  )
+}
+
+# ============================================================
+# Prepare datasets
+# ============================================================
+standard_data <- prep_data("standard")
+lsrt_data     <- prep_data("LSRT")
+
+normalised_standard <- normalise_to_ts(standard_data)
+normalised_lsrt     <- normalise_to_ts(lsrt_data)
+```
+
+```{r fig-standard, echo=FALSE, fig.cap="Mean MEP peak-to-peak amplitude data normalised to each participant's TS-only geometric mean (100%) during the standard MI script.", fig.width=10, fig.height=7}
+plot_normalised(normalised_standard, "MEP Amplitude as % of M1-only Mean per Participant (Standard Script)")
+```
+
+```{r fig-lsrt, echo=FALSE, fig.cap="Mean MEP peak-to-peak amplitude data normalised to each participant's TS-only geometric mean (100%) during the LSRT MI script.", fig.width=10, fig.height=7}
+plot_normalised(normalised_lsrt, "MEP Amplitude as % of M1-only Mean per Participant (Guided Script)")
+```
+
+```{r fig-ind-standard, echo=FALSE, fig.cap="Individual participant trial-level MEP amplitude data using the standard MI script.", fig.width=10, fig.height=8}
+plot_individual(standard_data, "MEP Amplitude by Condition per Participant (Standard Script)")
+```
+
+```{r fig-ind-lsrt, echo=FALSE, fig.cap="MEP Individual participant trial-level MEP amplitude data using the LSRT MI script.", fig.width=10, fig.height=8}
+plot_individual(lsrt_data, "MEP Amplitude by Condition per Participant (Guided Script)")
+```
+
+```{r table-effects, echo=FALSE}
+effect_table <- bind_rows(
+  get_effect_sizes(standard_data, "Standard"),
+  get_effect_sizes(lsrt_data, "LSRT")
+)
+
+kable(effect_table, caption = "Effect Sizes (Cohen's d) for MEP Comparisons")
+```
+
+## Discussion
+
+Significant faciliatory PPC-M1 interactions were observed at the 8ms condition during guided motor imagery, however, this was not observed during the standard motor imagery script. These findings suggest an instruction-dependent effect of motor imagery on the underling neurophysiology. This also provides evidence for a priming effect that the PPC has on the intrahemispheric M1 during guided motor imagery. Overall, this has implications for how motor imagery is applied in clinical, therapeutic, and athletic settings.
+
+### Limitations
+
+As the PPC does not directly produce motor output, we were unable to individually hotspot the location for each participant.
+
+Instead, we used neuronavigation coordinates of the PPC. Inter-individual anatomical differences may have contributed to slight variation in TMS stimulus location.
+
+We were also limited to analyzing a small sample size for the current scope of analysis.
+
+# References

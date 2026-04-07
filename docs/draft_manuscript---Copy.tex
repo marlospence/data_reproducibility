@@ -1,0 +1,262 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={draft\_manuscript\_Dual\_Coil},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{draft\_manuscript\_Dual\_Coil}
+\author{}
+\date{\vspace{-2.5em}2026-02-12}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{list.files}\NormalTok{(}\FunctionTok{getwd}\NormalTok{(), }\AttributeTok{pattern =} \StringTok{".html"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "draft_manuscript.html"
+\end{verbatim}
+
+\subsection{Introduction}\label{introduction}
+
+\subsubsection{Sensory Integration and Motor Planning (Sample Intro
+First
+Paragraph)}\label{sensory-integration-and-motor-planning-sample-intro-first-paragraph}
+
+Activity in the posterior parietal cortex (PPC) is associated with key
+roles in motor planning prior to movement execution, integrating visual,
+auditory, and somatosensory information prior to movement initiation.
+Activity in the PPC is associated with the initial planning of a
+physical action (Andersen \& Buneo, 2002; Cohen \& Andersen, 2002){]}.
+During the earliest stages of motor planning prior to execution, the PPC
+is involved with the transformation and coordination of reference-frames
+from various sensory modalities; integrating visual coordinates
+originating from the eyes, auditory information related to head
+coordinates, and tactile coordinates from the body. Neurons located in
+the PPC are associated with the transformation of these varied sensory
+stimuli into general coordinates that form a common frame of reference,
+essential for the coordination of movements of different effectors to
+ensure coherent movement execution (Andersen \& Buneo, 2002). Early
+stages of motor planning taking place in the PPC represent the expected
+visual outcomes of a movement prior to downstream motor execution, with
+later stages of motor activity occurring primarily in the primary motor
+cortex (M1) (Pilacinski et al., 2018). There is evidence that suggests
+the PPC, independent of the M1, processes visual information used to
+later produce a corresponding motor output (Pilacinski et al., 2018),
+further implicating the PPC's role in the visual-integration aspects of
+motor planning/preparation.
+
+\subsubsection{Research Aim}\label{research-aim}
+
+To determine the intrahemispheric interconnectivity of the PPC
+(specifically the supramarginal gyrus) with the M1 during motor imagery
+(MI; the imagination of movement without physical execution) using
+dual-coil TMS.
+
+\subsection{Methods (Sample)}\label{methods-sample}
+
+Participants completed blocks of MI of a finger abduction task while
+dual-coil TMS was administered over the left PPC and M1.Electromyography
+(EMG) of the finger muscle was used to assess corticospinal excitability
+during the task.Paired TMS pulses were administered with the PPC as
+priming stimuli, followed by the test stimuli to the M1 after 4/8
+milliseconds interstimulus interval (ISI).Single pulses were
+administered for comparison to the paired pulses.
+
+\subsubsection{Data Analysis}\label{data-analysis}
+
+Peak-to-peak amplitudes of motor evoked potentials (MEPs) elicited by
+TMS during the trials were analyzed to determine facilitatory or
+inhibitory interactions between the PPC and the M1 during MI.Comparisons
+were made between paired-TMS trials (PPC and M1 pulses) and M1 stimulus
+only trials.
+
+\subsection{Figures/Results Draft}\label{figuresresults-draft}
+
+Overall, group level analyses yielded no significant interactions
+between the PPC and M1 during MI using our methodology. However,
+individual participant data showed individual variation in
+parietal-motor interaction during MI potential providing evidence for
+modulating activity at the 4ms ISI in differing ways for different
+individuals.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{draft_manuscript---Copy_files/figure-latex/unnamed-chunk-3-1.pdf}}
+\caption{MEP amplitude normalised to M1-only mean}
+\end{figure}
+
+\subsection{Discussion}\label{discussion}
+
+Findings provide insight into the neurophysiology underlying MI as well
+as dual-coil TMS stimulation parameters in research.
+
+\subsubsection{Limitations}\label{limitations}
+
+Due to the nature of the setup, we were unable to hotspot the PPC for
+each individual participant to guarantee we stimulate the same place on
+their brain. This could Potentially account for individual variability
+due to slight differences in TMS stimulus location.We are also limited
+to analysing a small sample size at the present moment.
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-andersenIntentionalMapsPosterior2002}
+Andersen, R. A., \& Buneo, C. A. (2002). Intentional maps in posterior
+parietal cortex. \emph{Annual Review of Neuroscience}, \emph{25},
+189--220. \url{https://doi.org/10.1146/annurev.neuro.25.112701.142922}
+
+\bibitem[\citeproctext]{ref-cohenCommonReferenceFrame2002}
+Cohen, Y. E., \& Andersen, R. A. (2002). A common reference frame for
+movement plans in the posterior parietal cortex. \emph{Nature Reviews.
+Neuroscience}, \emph{3}(7), 553--562.
+\url{https://doi.org/10.1038/nrn873}
+
+\bibitem[\citeproctext]{ref-pilacinskiHumanPosteriorParietal2018}
+Pilacinski, A., Wallscheid, ⨯. M., \& Lindner, A. (2018). Human
+posterior parietal and dorsal premotor cortex encode the visual
+properties of an upcoming action. \emph{PLoS One}, \emph{13}(10),
+e0198051. \url{https://doi.org/10.1371/journal.pone.0198051}
+
+\end{CSLReferences}
+
+\end{document}
