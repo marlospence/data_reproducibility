@@ -1,8 +1,8 @@
 ---
 title: "draft_manuscript_Dual_Coil"
 date: "2026-02-12"
-bibliography: "C:/Users/marlo/OneDrive/Data Reproducibility/DataReprod/data_reproducibility/references.bib"
-csl: "C:/Users/marlo/OneDrive/Data Reproducibility/DataReprod/data_reproducibility/apa.csl"
+bibliography: "references.bib"
+csl: "apa.csl"
 output:
   html_document:
     df_print: paged
@@ -41,6 +41,7 @@ Overall, group level analyses yielded no significant interactions between the PP
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 library(ggplot2)
+
 
 data <- read.csv("C:/Users/marlo/OneDrive/Data Reproducibility/DataReprod/data_reproducibility/data/data_processed/mep_long.csv")
 ```

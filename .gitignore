@@ -20,7 +20,8 @@
 /*.tar.gz
 
 # don't store data; we'll use proper data repo
-/data
+/data/data_raw
+/data/data_processed
 #/renv
 renv/library/
 # Output files from R CMD check

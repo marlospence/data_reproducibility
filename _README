@@ -1,3 +1,50 @@
-# Background
+Got it, that's everything I need except contributors — I'll leave a placeholder. Here's the README:
 
-This is a readme file
+README: Examining Intrahemispheric Parietal-Motor Interconnectivity During Motor Imagery Using Dual-Coil Transcranial Magnetic Stimulation
+Project Overview
+This project investigates the intrahemispheric connectivity between the posterior parietal cortex (PPC; specifically the supramarginal gyrus) and primary motor cortex (M1) during motor imagery using dual-coil transcranial magnetic stimulation (TMS). A secondary aim was to determine whether a guided motor imagery script (LSRT) produces stronger PPC-M1 interactions than a standard motor imagery script.
+Contributors
+
+[Add contributors here]
+
+Repository Structure
+├── data/
+│   ├── data_raw/          # Raw electrophysiological files (.cfs, .sgrx) per participant
+│   └── data_processed/
+│       ├── MEP_long.csv   # Processed long-format MEP data used in analysis
+│       └── DATA_DICTIONARY
+├── docs/
+│   ├── draft_manuscript.Rmd   # R Markdown manuscript with embedded analysis
+│   ├── draft_manuscript.html  # Rendered manuscript
+│   ├── references.bib         # Zotero-exported BibTeX references
+│   └── apa.csl                # APA citation style file
+├── scripts/
+│   └── test_script.R      # MEP analysis: paired t-tests, effect sizes, plots
+├── Dictionarys/
+│   └── DATA_DICTIONARY    # Variable descriptions
+├── renv.lock              # Package environment lockfile
+└── data_reproducibility.Rproj
+Data Description
+data/data_processed/MEP_long.csv contains trial-level MEP amplitude data in long format with the following columns:
+ColumnDescriptionparticipant_idParticipant identifier (p01, p02, p03, ...)conditionTMS condition: TS (test stimulus / M1-only), 4ms, or 8ms (ISI for dual-coil)mep_amplitudeMEP amplitude (mV) for each individual trialscriptMotor imagery script: standard or LSRT (guided)
+Raw data files (.cfs, .sgrx) are named by participant, visit, ISI, and block (e.g., 001_V1_4ms_standard_B1). Raw data are not publicly accessible due to the inclusion of potentially sensitive human participant data.
+Reproducing the Analysis
+This project uses renv for package management. To restore the environment:
+rrenv::restore()
+Required packages
+
+dplyr
+ggplot2
+effsize
+
+Steps
+
+Open data_reproducibility.Rproj in RStudio
+Run renv::restore() to install required packages
+Open scripts/test_script.R and run to reproduce statistical analyses and figures
+Open docs/draft_manuscript.Rmd and knit to reproduce the manuscript
+
+Ethics and Data Availability
+Processed data (MEP_long.csv) are not publicly accessible due to the potentially sensitive nature of human participant data. Requests for data access can be directed to [contact info].
+License
+This project is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0). You are free to share and adapt the materials for any purpose, provided appropriate credit is given.
