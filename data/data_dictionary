@@ -1,28 +1,35 @@
-Data Dictionary: MEP_long.csv
+
+Data Dictionary: 
+
+Dataset Name: MEP_long.csv
+
 File Description
 Trial-level motor evoked potential (MEP) amplitude data in long format. Each row represents a single TMS trial for one participant under one condition and script.
 
-Variables
+Variables:
 
 Variable ID: participant_id
 Variable Name: Participant Identifier
 Variable Definition: A unique anonymised identifier assigned to each participant.
 Variable Type: Character
 Allowable Values: p01, p02, p03, p04, p05, p06
-Notes: Six participants total. Only five participants completed the LSRT script condition.
+Missing Value Code: N/A — no missing values
+Notes: Six participants total. Five of the six participants completed the LSRT script condition.
 
 Variable ID: condition
 Variable Name: TMS Condition
 Variable Definition: The TMS stimulation condition applied during the trial. TS denotes a single-pulse test stimulus delivered to M1 only. 4ms and 8ms denote paired-pulse TMS with a conditioning pulse delivered to the PPC at 4ms or 8ms interstimulus interval (ISI) prior to the M1 test stimulus.
 Variable Type: Character
 Allowable Values: TS, 4ms, 8ms
+Missing Value Code: N/A — no missing values
 Notes: The TS condition serves as the M1-only baseline comparator in all analyses.
 
 Variable ID: mep_amplitude
 Variable Name: MEP Amplitude
-Variable Definition: The peak-to-peak amplitude of the motor evoked potential (MEP) recorded from the target muscle following TMS, for a single trial.
+Variable Definition: The peak-to-peak amplitude of the motor evoked potential (MEP) recorded from the target muscle following TMS, for a single trial recorded in mV. Manually extracted from raw .cfs files using CED Signal; log-transformed for analysis in manuscript R markdown file.
 Variable Type: Numeric
 Allowable Values: Any positive value (mV); no predefined range
+Missing Value Code: N/A — no missing values
 Notes: Approximately 18 trials per participant per condition, though trial counts may vary slightly. No missing values.
 
 Variable ID: script
@@ -30,14 +37,23 @@ Variable Name: Motor Imagery Script
 Variable Definition: The motor imagery script used during the trial. standard refers to a standard motor imagery script. LSRT refers to the Layered Stimulus Response Training guided motor imagery script.
 Variable Type: Character
 Allowable Values: standard, LSRT
-Notes: All six participants completed the standard script. Only five participants completed the LSRT script.
+Missing Value Code: N/A — no missing values
+Notes: All six participants completed the standard script. Five of the six participants completed the LSRT script.
 
-Raw Data Files
+Raw Data Files:
+
 Location: data/data_raw/
 File Types: .cfs and .sgrx
 Software: CED Signal
-File Description: Paired files containing raw electromyography (EMG) signal data recorded during the TMS experiment. Each .cfs file contains the raw electrophysiological trace data; the accompanying .sgrx file contains the associated Signal software settings and configuration.
+File Description: Paired files containing raw electromyography (EMG) signal data recorded during the TMS experiment. Each .cfs file contains the raw electrophysiological signal data; the accompanying .sgrx file contains the associated Signal software settings and configuration.
+
 Naming Convention: {participant}_{visit}_{ISI}_{script}_{block}
-ComponentDescriptionExample valuesparticipantThree-digit participant number001, 002, 003visitStudy visit numberV1, V2ISIInterstimulus interval4ms, 8msscriptMotor imagery scriptstandard, lsrtblockBlock number within sessionB1, B2
+participant: three-digit participant number (e.g., 001)
+visit: study visit (e.g., V1, V2)
+ISI: interstimulus interval (e.g., 4ms, 8ms)
+script: motor imagery script (e.g., standard, lsrt)
+block: block number within session (e.g., B1, B2)
 Example: 002_V1_4ms_lsrt_B1 — participant 002, visit 1, 4ms ISI, LSRT script, block 1.
+
+Missing Value Code: N/A — no missing values
 Notes: Raw data files are not publicly accessible due to the potentially sensitive nature of human participant data.

@@ -1,48 +1,70 @@
+
 README: Examining Intrahemispheric Parietal-Motor Interconnectivity During Motor Imagery Using Dual-Coil Transcranial Magnetic Stimulation
 Project Overview
 This project investigates the intrahemispheric connectivity between the posterior parietal cortex (PPC; specifically the supramarginal gyrus) and primary motor cortex (M1) during motor imagery using dual-coil transcranial magnetic stimulation (TMS). A secondary aim was to determine whether a guided motor imagery script (LSRT) produces stronger PPC-M1 interactions than a standard motor imagery script.
-Contributors
+
+Completed in April, 2026.
 
 Contributors: Marlo Spence, Sarah Kraeutner, Alisha Davis
+
+Contact information: Marlo Spence, UBC, email: marlo.a.spence@gmail.com
+Sarah Kraeutner, UBC
+Alisha Davis, UBC
+
+Methodology: 
+
+Data Collection: Participants completed motor imagery trials under three TMS conditions (M1-only test stimulus, dual-coil with 4ms ISI, dual-coil with 8ms ISI) across two motor imagery scripts (standard and LSRT). A conditioning pulse was delivered to the supramarginal gyrus of the PPC, followed by a test stimulus to M1. MEP amplitudes were recorded from the target hand muscle via EMG using CED Signal software.
+Data Processing: Raw EMG signal files (.cfs, .sgrx) were exported and MEP peak-to-peak amplitudes were manually extracted and compiled into long-format CSV. Data were log-transformed prior to analysis.
+Analysis: Paired t-tests were conducted comparing MEP amplitudes between the M1-only condition and each dual-coil ISI condition (4ms, 8ms) separately for each script. Effect sizes were calculated using Cohen's d with 95% confidence intervals. All analyses were conducted in R.
 
 Repository Structure
 ├── data/
 │   ├── data_raw/          # Raw electrophysiological files (.cfs, .sgrx) per participant
 │   └── data_processed/
 │       ├── MEP_long.csv   # Processed long-format MEP data used in analysis
-│       └── DATA_DICTIONARY
+│       └── data_dictionary    # Variable descriptions used in analysis
 ├── docs/
-│   ├── draft_manuscript.Rmd   # R Markdown manuscript with embedded analysis
-│   ├── draft_manuscript.html  # Rendered manuscript
+│   ├── final_draft_manuscript.Rmd   # R Markdown manuscript with embedded analysis
+│   ├── final_draft_manuscript.html# Rendered manuscript
+│   ├── final_draft_manuscript.pdf # Knitted pdf of manuscript
 │   ├── references.bib         # Zotero-exported BibTeX references
-│   └── apa.csl                # APA citation style file
+│   └── apa.csl                # APA 7th edition citation style file
 ├── scripts/
-│   └── test_script.R      # MEP analysis: paired t-tests, effect sizes, plots
-├── Dictionarys/
-│   └── DATA_DICTIONARY    # Variable descriptions
+│   └── test_script.R      # test script completed in class
 ├── renv.lock              # Package environment lockfile
 └── data_reproducibility.Rproj
-Data Description
+
+Data Description:
+
 data/data_processed/MEP_long.csv contains trial-level MEP amplitude data in long format with the following columns:
-ColumnDescriptionparticipant_idParticipant identifier (p01, p02, p03, ...)conditionTMS condition: TS (test stimulus / M1-only), 4ms, or 8ms (ISI for dual-coil)mep_amplitudeMEP amplitude (mV) for each individual trialscriptMotor imagery script: standard or LSRT (guided)
+ColumnDescription: participant_id (Participant identifier (p01, p02, p03, ...)), condition (TMS condition: TS (test stimulus / M1-only), 4ms, or 8ms (ISI for dual-coil)), mep_amplitude (MEP amplitude (mV) for each individual trial), script (Motor imagery script: standard or LSRT (guided)).
 Raw data files (.cfs, .sgrx) are named by participant, visit, ISI, and block (e.g., 001_V1_4ms_standard_B1). Raw data are not publicly accessible due to the inclusion of potentially sensitive human participant data.
+
 Reproducing the Analysis
 This project uses renv for package management. To restore the environment:
-rrenv::restore()
+renv::restore()
 Required packages
 
 dplyr
 ggplot2
 effsize
 
-Steps
+Steps:
 
 Open data_reproducibility.Rproj in RStudio
 Run renv::restore() to install required packages
-Open scripts/test_script.R and run to reproduce statistical analyses and figures
-Open docs/draft_manuscript.Rmd and knit to reproduce the manuscript
+Open final_draft_manuscript.Rmd and run to reproduce statistical analyses and figures (will require data that is not provided)
+knit to reproduce the manuscript
 
-Ethics and Data Availability
-Processed data (MEP_long.csv) are not publicly accessible due to the potentially sensitive nature of human participant data. Requests for data access can be directed to [contact info].
-License
+Ethics and Data Availability:
+
+Processed data (MEP_long.csv) are not publicly accessible due to the potentially sensitive nature of human participant data. Requests for data access can be directed to Marlo Spence (marlo.a.spence@gmail.com).
+
+Acknowledgements: 
+
+This study is conducted as an Honours thesis by Marlo Spence and is in part funded by the Natural Sciences and Engineering Research Council of Canada (NSERC).
+
+
+License:
+
 This project is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0). You are free to share and adapt the materials for any purpose, provided appropriate credit is given.
