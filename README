@@ -19,7 +19,7 @@ Analysis: Paired t-tests were conducted comparing MEP amplitudes between the M1-
 
 Repository Structure
 ├── data/
-│   ├── data_raw/          # Raw electrophysiological files (.cfs, .sgrx) per participant
+│   ├── data_raw/          # Raw electromyography signal data files (.cfs, .sgrx) per participant
 │   └── data_processed/
 │       ├── MEP_long.csv   # Processed long-format MEP data used in analysis
 │       └── data_dictionary    # Variable descriptions used in analysis
