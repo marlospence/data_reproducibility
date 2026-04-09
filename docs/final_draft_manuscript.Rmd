@@ -3,7 +3,9 @@ title: "draft_manuscript_data_reproducibility"
 date: "2026-02-12"
 bibliography: references.bib
 output:
-  pdf_document: 
+  html_document:
+    df_print: paged
+  pdf_document:
     latex_engine: xelatex
     df_print: paged
 csl: apa.csl
