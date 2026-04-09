@@ -21,7 +21,7 @@ list.files(getwd(), pattern = ".html")
 
 ### Sensory Integration and Motor Planning (Sample Intro First Paragraph)
 
-Activity in the posterior parietal cortex (PPC) is associated with key roles in motor planning prior to movement execution, integrating visual, auditory, and somatosensory information prior to movement initiation. Activity in the PPC is associated with the initial planning of a physical action [@cohenCommonReferenceFrame2002; @andersenIntentionalMapsPosterior2002]]. During the earliest stages of motor planning prior to execution, the PPC is involved with the transformation and coordination of reference-frames from various sensory modalities; integrating visual coordinates originating from the eyes, auditory information related to head coordinates, and tactile coordinates from the body. Neurons located in the PPC are associated with the transformation of these varied sensory stimuli into general coordinates that form a common frame of reference, essential for the coordination of movements of different effectors to ensure coherent movement execution [@andersenIntentionalMapsPosterior2002]. Early stages of motor planning taking place in the PPC represent the expected visual outcomes of a movement prior to downstream motor execution, with later stages of motor activity occurring primarily in the primary motor cortex (M1) [@pilacinskiHumanPosteriorParietal2018]. There is evidence that suggests the PPC, independent of the M1, processes visual information used to later produce a corresponding motor output [@pilacinskiHumanPosteriorParietal2018], further implicating the PPC’s role in the visual-integration aspects of motor planning/preparation.
+Activity in the posterior parietal cortex (PPC) is associated with key roles in motor planning, integrating visual, auditory, and somatosensory information prior to movement initiation/execution. Activity in the PPC is associated with the initial planning of a physical action [@cohenCommonReferenceFrame2002; @andersenIntentionalMapsPosterior2002]]. During the earliest stages of motor planning prior to execution, the PPC is involved with the transformation and coordination of reference-frames from various sensory modalities; integrating visual coordinates originating from the eyes, auditory information related to head coordinates, and tactile coordinates from the body. Neurons located in the PPC are associated with the transformation of these varied sensory stimuli into general coordinates that form a common frame of reference, essential for the coordination of movements of different effectors to ensure coherent movement execution [@andersenIntentionalMapsPosterior2002]. Early stages of motor planning taking place in the PPC represent the expected visual outcomes of a movement prior to downstream motor execution, with later stages of motor activity occurring primarily in the primary motor cortex (M1) [@pilacinskiHumanPosteriorParietal2018]. There is evidence that suggests the PPC, independent of the M1, processes visual information used to later produce a corresponding motor output [@pilacinskiHumanPosteriorParietal2018], further implicating the PPC’s role in the visual-integration aspects of motor planning/preparation.
 
 ### Research Aim
 
@@ -217,6 +217,10 @@ As the PPC does not directly produce motor output, we were unable to individuall
 
 Instead, we used neuronavigation coordinates of the PPC. Inter-individual anatomical differences may have contributed to slight variation in TMS stimulus location.
 
-We were also limited to analyzing a small sample size for the current scope of analysis.
+We were also limited to analyzing a small sample size for the current scope of analysis (Standard: N = 6; Guided: N = 5).
+
+### Future Directions
+
+There is need to examine the interactions of different brain regions with the M1 during motor imagery to further determine the neurophysiological mechanisms underlying motor imagery.
 
 # References
